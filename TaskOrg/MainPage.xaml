@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="TaskOrg.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TaskOrg"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.BottomAppBar>
+        <CommandBar Height="50">
+            <AppBarButton x:Name="AddButton" Icon="Add" Label="Add Task" Click="AddButton_Click"/>
+            <AppBarButton Icon="HideBcc" Label="Hide/Reveal Tasks"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <ScrollViewer x:Name="Scroller" Background="#FFC3E236">
+        <Grid x:Name="Grid" Background="#FF2316A4" Height="440" Margin="30,0">
+
+
+            <StackPanel x:Name="TaskStack"
+                               
+                                    Background="#FF7BD85F" 
+                                    RenderTransformOrigin="0.504,0.527" 
+                                    Margin="0.333,0,-0.333,0" 
+                                    ManipulationMode="TranslateX" HorizontalAlignment="Center"/>
+        </Grid>
+    </ScrollViewer>
+</Page>
