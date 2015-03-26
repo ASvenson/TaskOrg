@@ -23,12 +23,12 @@ namespace TaskOrg
     public sealed partial class MainPage : Page
     {
         List<TaskList> listArray;
-        //int Tnum;
+        int NewButtonID;
         
         public MainPage()
         {
             this.InitializeComponent();
-            //Tnum = 3;
+            NewButtonID = 0;
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             for (int i = 0; i < 3; i++)
@@ -41,14 +41,16 @@ namespace TaskOrg
         }
         public void addList()
         {
+            int ButtonID = NewButtonID;
+            NewButtonID++;
             TaskList temp = new TaskList();
-            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag=temp};
+            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title+ButtonID, Tag=ButtonID};
             newBox.Click += Box_Click;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
                 Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
             };
-            //listArray.Add(temp);
+            listArray.Add(temp);
             TaskStack.Children.Add(newBox);
             Grid.Height = TaskStack.Height;
             //Tnum++;
