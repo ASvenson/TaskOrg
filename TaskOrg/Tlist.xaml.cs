@@ -25,6 +25,7 @@ namespace TaskOrg
     /// </summary>
     public sealed partial class Tlist : Page
     {
+        private TaskList currTaskList;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -44,22 +45,32 @@ namespace TaskOrg
 
         public void addTask()
         {
-            //TaskList temp = new TaskList();
-            Button newTBox = new Button() { Height = 100, Width = 200, Content = "Title" };
+            task newTask = new task();
+            Button newTBox = new Button() { Height = 100, Width = 200, Content = newTask.Title, Tag = newTask};
             newTBox.Click += Task_Click;
             newTBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
                 Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
             };
-            // listArray.Add(temp);
+            currTaskList.Tasks.Add(newTask);
             TaskStack.Children.Add(newTBox);
             Grid.Height = TaskStack.Height;
-            //Tnum++;
+        }
+        public void addTask(task currTask)
+        {
+            Button newTBox = new Button() { Height = 100, Width = 200, Content = currTask.Title, Tag = currTask};
+            newTBox.Click += Task_Click;
+            newTBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
+            {
+                Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
+            };
+            TaskStack.Children.Add(newTBox);
+            Grid.Height = TaskStack.Height;
         }
 
         private async void Task_Click(object sender, RoutedEventArgs e)
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(TPage)));
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(TPage), ((Button)sender).Tag));
         }
 
         /// <summary>
@@ -92,6 +103,12 @@ namespace TaskOrg
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            currTaskList = ((TaskList)e.NavigationParameter);
+            int num = currTaskList.Tasks.Count;
+            for(int i = 0; i < num; i++)
+            {
+                addTask(currTaskList.Tasks[i]);
+            }
         }
 
         /// <summary>

@@ -13,9 +13,11 @@ namespace TaskOrg
         public TaskList()
         {
             title = "Title";
+            listArray = new List<task>();
             for(int i = 0; i < 2; i++)
             {
-                listArray.Add(new task());
+                task newTask = new task();
+                listArray.Add(newTask);
             }
         }
         public string Title
@@ -28,6 +30,18 @@ namespace TaskOrg
             set
             {
                 title = value;
+            }
+        }
+        public List<task> Tasks
+        {
+            get
+            {
+                return listArray;
+            }
+
+            set
+            {
+                listArray = value;
             }
         }
     }

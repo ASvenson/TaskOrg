@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace TaskOrg
 {
-    class task
+    public class task
     {
         string title;
         string description;
+
         public task()
         {
             title = "Title";

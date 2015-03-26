@@ -31,6 +31,8 @@ namespace TaskOrg
             NewButtonID = 0;
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
+            listArray = new List<TaskList>();
+
             for (int i = 0; i < 3; i++)
             {
 
@@ -44,7 +46,7 @@ namespace TaskOrg
             int ButtonID = NewButtonID;
             NewButtonID++;
             TaskList temp = new TaskList();
-            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title+ButtonID, Tag=ButtonID};
+            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title+ButtonID, Tag=temp};
             newBox.Click += Box_Click;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
@@ -59,13 +61,6 @@ namespace TaskOrg
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(Tlist), ((Button)sender).Tag));
         }
-
-        //public windows.ui.xaml.routedeventhandler settask(int id)
-        //{
-        //    page temppage = new page();
-        //    tasklist list = listarray.elementat(id);
-        //    return null;
-        //}
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
