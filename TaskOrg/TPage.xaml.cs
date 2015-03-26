@@ -23,43 +23,18 @@ namespace TaskOrg
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Tlist : Page
+    public sealed partial class BasicPage1 : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public Tlist()
+        public BasicPage1()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            addTask();
-        }
-
-        public void addTask()
-        {
-            //TaskList temp = new TaskList();
-            Button newTBox = new Button() { Height = 100, Width = 200, Content = "Title" };
-            newTBox.Click += Task_Click;
-            newTBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
-            {
-                Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
-            };
-            // listArray.Add(temp);
-            TaskStack.Children.Add(newTBox);
-            Grid.Height = TaskStack.Height;
-            //Tnum++;
-        }
-
-        private async void Task_Click(object sender, RoutedEventArgs e)
-        {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(TPage)));
         }
 
         /// <summary>
@@ -132,10 +107,5 @@ namespace TaskOrg
         }
 
         #endregion
-
-        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-        {
-
-        }
     }
 }

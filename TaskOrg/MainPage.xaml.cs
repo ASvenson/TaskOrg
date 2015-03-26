@@ -41,21 +41,21 @@ namespace TaskOrg
         }
         public void addList()
         {
-           //TaskList temp = new TaskList();
-            Button newBox = new Button() { Height = 100, Width = 200, Content = "Title" };
+            TaskList temp = new TaskList();
+            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag=temp};
             newBox.Click += Box_Click;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
                 Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
             };
-           // listArray.Add(temp);
+            //listArray.Add(temp);
             TaskStack.Children.Add(newBox);
             Grid.Height = TaskStack.Height;
             //Tnum++;
         }
         private async void Box_Click(object sender, RoutedEventArgs e)
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(Tlist)));
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(Tlist), ((Button)sender).Tag));
         }
 
         //public windows.ui.xaml.routedeventhandler settask(int id)
