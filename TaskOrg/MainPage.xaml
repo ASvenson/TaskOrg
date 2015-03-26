@@ -14,7 +14,7 @@
             <AppBarButton Icon="HideBcc" Label="Hide/Reveal Tasks"/>
         </CommandBar>
     </Page.BottomAppBar>
-    <ScrollViewer x:Name="Scroller" Background="#FFC3E236">
+    <ScrollViewer x:Name="Scroller" Background="#66E1E2DE">
         <Grid x:Name="Grid" Background="#FF2316A4" Height="440" Margin="30,0">
 
 

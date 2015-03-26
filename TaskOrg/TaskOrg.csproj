@@ -85,6 +85,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="task.cs" />
+    <Compile Include="TaskList.cs" />
     <Compile Include="Tlist.xaml.cs">
       <DependentUpon>Tlist.xaml</DependentUpon>
     </Compile>

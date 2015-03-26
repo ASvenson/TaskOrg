@@ -8,28 +8,25 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="LayoutRoot">
+    <Page.BottomAppBar>
+        <CommandBar Height="50">
+            <AppBarButton x:Name="AddButton" Icon="Add" Label="Add Task" Click="AddButton_Click"/>
+            <AppBarButton Icon="HideBcc" Label="Hide/Reveal Tasks"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid>
+        <TextBox x:Name="TitleBox" Text="Title" Background="#FF9B3B3B" TextAlignment="Center" VerticalAlignment="Top" />
+        <ScrollViewer x:Name="Scroller" Background="#E5B1C969" ViewChanged="Scroller_ViewChanged" Margin="0,48,0,0">
+            <Grid x:Name="Grid" Background="#FF2316A4" Height="440" Margin="30,0">
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="page title" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
-
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-
-        </Grid>
+                <StackPanel x:Name="TaskStack"
+                               
+                                    Background="#FF7BD85F" 
+                                    RenderTransformOrigin="0.504,0.527" 
+                                    Margin="0.333,0,-0.333,0" 
+                                    ManipulationMode="TranslateX" HorizontalAlignment="Center"/>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

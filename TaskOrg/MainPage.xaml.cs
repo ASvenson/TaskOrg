@@ -22,7 +22,7 @@ namespace TaskOrg
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //List<TaskList> listArray;
+        List<TaskList> listArray;
         //int Tnum;
         
         public MainPage()
@@ -53,9 +53,9 @@ namespace TaskOrg
             Grid.Height = TaskStack.Height;
             //Tnum++;
         }
-        private void Box_Click(object sender, RoutedEventArgs e)
+        private async void Box_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Tlist));
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(Tlist)));
         }
 
         //public windows.ui.xaml.routedeventhandler settask(int id)
