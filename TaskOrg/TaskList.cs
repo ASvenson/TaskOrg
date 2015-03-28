@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskOrg
 {
-    class TaskList
+    public class TaskList
     {
         string title;
         List<task> listArray;

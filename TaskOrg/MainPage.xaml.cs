@@ -33,20 +33,20 @@ namespace TaskOrg
 
             listArray = new List<TaskList>();
 
-            for (int i = 0; i < 3; i++)
-            {
+            //for (int i = 0; i < 3; i++)
+            //{
 
-                addList();
+            //    addList();
 
-            }
+            //}
             
         }
         public void addList()
         {
-            int ButtonID = NewButtonID;
-            NewButtonID++;
+           // int ButtonID = NewButtonID;
+           // NewButtonID++;
             TaskList temp = new TaskList();
-            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title+ButtonID, Tag=temp};
+            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag=temp};
             newBox.Click += Box_Click;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
@@ -55,7 +55,18 @@ namespace TaskOrg
             listArray.Add(temp);
             TaskStack.Children.Add(newBox);
             Grid.Height = TaskStack.Height;
-            //Tnum++;
+        }
+
+        public void addList(TaskList temp)
+        {
+            Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag = temp };
+            newBox.Click += Box_Click;
+            newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
+            {
+                Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
+            };
+            TaskStack.Children.Add(newBox);
+            Grid.Height = TaskStack.Height;
         }
         private async void Box_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +83,12 @@ namespace TaskOrg
             // TODO: Prepare page for display here.
 
             // listArray= new List<TaskList>();
+            TaskStack.Children.Clear();
+            int count = listArray.Count;
+            for(int i = 0; i<count; i++)
+            {
+                addList(listArray[i]);
+            }
 
             
             

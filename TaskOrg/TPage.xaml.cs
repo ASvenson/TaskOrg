@@ -27,6 +27,7 @@ namespace TaskOrg
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        task currTask;
 
         public TPage()
         {
@@ -35,6 +36,16 @@ namespace TaskOrg
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+        }
+
+        public void SetTitle(object sender, TextChangedEventArgs e)
+        {
+            currTask.Title = TaskTitle.Text;
+        }
+
+        public void SetDescription(object sender, TextChangedEventArgs e)
+        {
+            currTask.Description = Description.Text;
         }
 
         /// <summary>
@@ -67,6 +78,9 @@ namespace TaskOrg
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            currTask = ((task)e.NavigationParameter);
+            TaskTitle.Text = currTask.Title;
+            Description.Text = currTask.Description;
         }
 
         /// <summary>

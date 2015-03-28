@@ -68,6 +68,11 @@ namespace TaskOrg
             Grid.Height = TaskStack.Height;
         }
 
+        public void SetTitle(object sender, TextChangedEventArgs e)
+        {
+            currTaskList.Title = TitleBox.Text;
+        }
+
         private async void Task_Click(object sender, RoutedEventArgs e)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(TPage), ((Button)sender).Tag));

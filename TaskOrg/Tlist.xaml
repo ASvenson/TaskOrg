@@ -15,7 +15,7 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid>
-        <TextBox x:Name="TitleBox" Text="Title" Background="#FF9B3B3B" TextAlignment="Center" VerticalAlignment="Top" />
+        <TextBox x:Name="TitleBox" Text="Title" Background="#FF9B3B3B" TextAlignment="Center" VerticalAlignment="Top" TextChanged="SetTitle"/>
         <ScrollViewer x:Name="Scroller" Background="#E5B1C969" ViewChanged="Scroller_ViewChanged" Margin="0,48,0,0">
             <Grid x:Name="Grid" Background="#FF2316A4" Height="440" Margin="30,0">
 
