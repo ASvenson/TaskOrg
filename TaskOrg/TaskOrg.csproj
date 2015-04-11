@@ -85,6 +85,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="data.xaml.cs">
+      <DependentUpon>data.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TPage.xaml.cs">
       <DependentUpon>TPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="data.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
