@@ -18,8 +18,8 @@
 
         <Grid>
             <StackPanel>
-                <TextBox x:Name="TaskTitle" Text="Title" Background="#FF9B3B3B" TextAlignment="Center" VerticalAlignment="Top" TextChanged="SetTitle"/>
-                <TextBox x:Name="Description" VerticalAlignment="Stretch" Height="299" Background="#FFCDC9C9" TextChanged="SetDescription"/>
+                <TextBox x:Name="TaskTitle" Text="Title" Background="#FF9B3B3B" TextAlignment="Center" VerticalAlignment="Top" TextChanged="SetTitle" Margin="10,0"/>
+                <TextBox x:Name="Description" VerticalAlignment="Stretch" Height="284" Background="#FFCDC9C9" TextChanged="SetDescription" Margin="10,20,10,0"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -11,7 +11,7 @@
     <Page.BottomAppBar>
         <CommandBar Height="50">
             <AppBarButton x:Name="AddButton" Icon="Add" Label="Add Task" Click="AddButton_Click"/>
-            <AppBarButton Icon="HideBcc" Label="Hide/Reveal Tasks"/>
+           
         </CommandBar>
     </Page.BottomAppBar>
     <ScrollViewer x:Name="Scroller" Background="#66E1E2DE">

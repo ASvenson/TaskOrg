@@ -12,7 +12,7 @@ namespace TaskOrg
         List<task> listArray;
         public TaskList()
         {
-            title = "Title";
+            title = "List Title";
             listArray = new List<task>();
             for(int i = 0; i < 2; i++)
             {

@@ -48,6 +48,8 @@ namespace TaskOrg
             task newTask = new task();
             Button newTBox = new Button() { Height = 100, Width = 200, Content = newTask.Title, Tag = newTask};
             newTBox.Click += Task_Click;
+            newTBox.IsHoldingEnabled = true;
+            newTBox.Holding+=newTBox_Holding;
             newTBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
                 Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
@@ -60,6 +62,8 @@ namespace TaskOrg
         {
             Button newTBox = new Button() { Height = 100, Width = 200, Content = currTask.Title, Tag = currTask};
             newTBox.Click += Task_Click;
+            newTBox.IsHoldingEnabled = true;
+            newTBox.Holding += newTBox_Holding;
             newTBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
                 Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
@@ -68,10 +72,44 @@ namespace TaskOrg
             Grid.Height = TaskStack.Height;
         }
 
+        private void newTBox_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            currTaskList.Tasks.Remove(((task)((Button)sender).Tag));
+            ((Button)sender).Visibility = Visibility.Collapsed;
+            
+            
+        }
+
+        private void refresh(LoadStateEventArgs e)
+        {
+            currTaskList = ((TaskList)e.NavigationParameter);
+            TaskStack.Children.Clear();
+            int num = currTaskList.Tasks.Count;
+            TitleBox.Text = currTaskList.Title;
+            for (int i = 0; i < num; i++)
+            {
+                addTask(currTaskList.Tasks[i]);
+            }
+        }
+
+        private void refresh()
+        {
+            TaskStack.Children.Clear();
+            int num = currTaskList.Tasks.Count;
+            TitleBox.Text = currTaskList.Title;
+            for (int i = 0; i < num; i++)
+            {
+                addTask(currTaskList.Tasks[i]);
+            }
+
+        }
+
         public void SetTitle(object sender, TextChangedEventArgs e)
         {
             currTaskList.Title = TitleBox.Text;
         }
+
+        
 
         private async void Task_Click(object sender, RoutedEventArgs e)
         {
@@ -108,12 +146,7 @@ namespace TaskOrg
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            currTaskList = ((TaskList)e.NavigationParameter);
-            int num = currTaskList.Tasks.Count;
-            for(int i = 0; i < num; i++)
-            {
-                addTask(currTaskList.Tasks[i]);
-            }
+            refresh(e);
         }
 
         /// <summary>

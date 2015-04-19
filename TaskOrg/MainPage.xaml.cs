@@ -43,12 +43,20 @@ namespace TaskOrg
 
         public MainPage()
         {
+
+            listArray = new List<TaskList>();
+           // createFile();
+            
+
             this.InitializeComponent();
          
             NewButtonID = 0;
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-            listArray = new List<TaskList>();
+            
+
+            
+           
 
 
             localFolder = ApplicationData.Current.LocalFolder;
@@ -60,7 +68,10 @@ namespace TaskOrg
         }
         public async void createFile()
         {
-            await localFolder.CreateFileAsync(filename);
+            StorageFile file = await localFolder.CreateFileAsync(filename);
+            IList<string> text= new List<string>();
+            text.Add("hello");
+            await FileIO.WriteLinesAsync(file, text);
 
         }
         public void addList()
@@ -70,22 +81,34 @@ namespace TaskOrg
             TaskList temp = new TaskList();
             Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag = temp };
             newBox.Click += Box_Click;
+            newBox.IsHoldingEnabled = true;
+            newBox.Holding += newBox_Holding;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
-                Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
+                Color = Windows.UI.Color.FromArgb(255, 255, 0, 255)
             };
             listArray.Add(temp);
             TaskStack.Children.Add(newBox);
             Grid.Height = TaskStack.Height;
         }
 
+        private void newBox_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            listArray.Remove(((TaskList)((Button)sender).Tag));
+            refresh();
+        }
+
+       
+
         public void addList(TaskList temp)
         {
             Button newBox = new Button() { Height = 100, Width = 200, Content = temp.Title, Tag = temp };
             newBox.Click += Box_Click;
+            newBox.IsHoldingEnabled = true;
+            newBox.Holding += newBox_Holding;
             newBox.Background = new Windows.UI.Xaml.Media.SolidColorBrush()
             {
-                Color = Windows.UI.Color.FromArgb(255, 255, 0, 0)
+                Color = Windows.UI.Color.FromArgb(255, 255, 0, 255)
             };
             TaskStack.Children.Add(newBox);
             Grid.Height = TaskStack.Height;
@@ -93,6 +116,17 @@ namespace TaskOrg
         private async void Box_Click(object sender, RoutedEventArgs e)
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => Frame.Navigate(typeof(Tlist), ((Button)sender).Tag));
+        }
+
+        private void refresh()
+        {
+            TaskStack.Children.Clear();
+            //loadOld();
+            int count = listArray.Count;
+            for (int i = 0; i < count; i++)
+            {
+                addList(listArray[i]);
+            }
         }
 
         /// <summary>
@@ -105,12 +139,8 @@ namespace TaskOrg
             // TODO: Prepare page for display here.
 
             // listArray= new List<TaskList>();
-            TaskStack.Children.Clear();
-            int count = listArray.Count;
-            for (int i = 0; i < count; i++)
-            {
-                addList(listArray[i]);
-            }
+
+            refresh();
 
 
 
@@ -137,6 +167,7 @@ namespace TaskOrg
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+            saveCurrent();
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
@@ -183,7 +214,8 @@ namespace TaskOrg
 
             catch (FileNotFoundException)
             {
-                createFile();
+               createFile();
+               loadOld();
             }
         }
 

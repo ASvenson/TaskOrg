@@ -13,7 +13,7 @@ namespace TaskOrg
 
         public task()
         {
-            title = "Title";
+            title = "Task Title";
             description = "Enter a Description";
         }
         public string Title
